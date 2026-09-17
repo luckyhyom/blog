@@ -33,3 +33,25 @@
 - [ ] `brew install --cask $(cat brew-casks.txt)` 로 일괄 설치
   - google-chrome, visual-studio-code, notion, obsidian, cmux
 - [ ] KakaoTalk — brew cask 없음, [공식 사이트](https://www.kakaocorp.com/page/service/service/KakaoTalk)에서 수동 설치
+
+
+### 명령어 (끊어서 순서대로 실행 — 한 번에 붙여넣기 안 됨)
+```bash
+# 1. 팝업 뜨면 "설치" 클릭, 완료될 때까지 기다린 후 다음 단계로
+xcode-select --install
+
+# 2. Homebrew 설치 (비밀번호 입력 필요)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 3. PATH에 brew 추가 (Apple Silicon은 /opt/homebrew라 이거 안 하면 brew 명령어 못 찾음)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+
+# 4. 리포 clone 후 패키지 일괄 설치
+git clone https://github.com/luckyhyom/blog.git ~/workspace/blog
+cd ~/workspace/blog
+
+brew install $(cat brew-list.txt)
+brew install --cask $(cat brew-casks.txt)
+colima start
+```
